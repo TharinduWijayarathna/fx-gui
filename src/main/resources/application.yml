@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: java-desktop-template
+  main:
+    web-application-type: none
+    banner-mode: "off"
+
+# Branding and window geometry for the shell. Point these at another product and the
+# desktop chrome follows — nothing in the presentation layer hard-codes them.
+app:
+  title: Vintorr Rently
+  tagline: Rental management for growing businesses
+  window:
+    width: 1280
+    height: 840
+    min-width: 1024
+    min-height: 700
+
+logging:
+  level:
+    root: WARN
+    com.vintorr.javadesktoptemplate: INFO
