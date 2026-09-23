@@ -56,6 +56,33 @@
 
     <build>
         <plugins>
+
+            <!--
+                Stages the JavaFX platform modules in target/javafx-modules so an IDE "Application"
+                run configuration can point its module path at a stable, project-relative folder.
+                See .run/ for the shipped IntelliJ configurations.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-javafx-modules</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/javafx-modules</outputDirectory>
+                            <includeGroupIds>org.openjfx</includeGroupIds>
+                            <includeClassifiers>${javafx.platform}</includeClassifiers>
+                            <stripVersion>false</stripVersion>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -75,4 +102,37 @@
             </plugin>
         </plugins>
     </build>
+    <!--
+        JavaFX publishes its real modules under a platform classifier; the unclassified jar is
+        an empty stub. These profiles pick the right one, mirroring what the OpenJFX POM does,
+        so the module path below can be assembled on any machine.
+    -->
+    <profiles>
+        <profile>
+            <id>javafx-mac-aarch64</id>
+            <activation><os><family>mac</family><arch>aarch64</arch></os></activation>
+            <properties><javafx.platform>mac-aarch64</javafx.platform></properties>
+        </profile>
+        <profile>
+            <id>javafx-mac-x86_64</id>
+            <activation><os><family>mac</family><arch>x86_64</arch></os></activation>
+            <properties><javafx.platform>mac</javafx.platform></properties>
+        </profile>
+        <profile>
+            <id>javafx-windows</id>
+            <activation><os><family>windows</family></os></activation>
+            <properties><javafx.platform>win</javafx.platform></properties>
+        </profile>
+        <profile>
+            <id>javafx-linux-aarch64</id>
+            <activation><os><family>unix</family><name>linux</name><arch>aarch64</arch></os></activation>
+            <properties><javafx.platform>linux-aarch64</javafx.platform></properties>
+        </profile>
+        <profile>
+            <id>javafx-linux-x86_64</id>
+            <activation><os><family>unix</family><name>linux</name><arch>amd64</arch></os></activation>
+            <properties><javafx.platform>linux</javafx.platform></properties>
+        </profile>
+    </profiles>
+
 </project>

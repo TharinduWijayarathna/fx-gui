@@ -1,0 +1,24 @@
+<component name="ProjectRunConfigurationManager">
+  <!--
+    JavaFX ships as JPMS modules. Launching it off the classpath works, but the toolkit warns
+    "Unsupported JavaFX configuration: classes were loaded from 'unnamed module'". The VM
+    parameters below put the platform modules on the module path instead, which is the
+    configuration JavaFX expects.
+
+    The before-launch Maven goal stages those modules into target/javafx-modules, picking the
+    classifier for whatever OS you are on (see the javafx-* profiles in pom.xml).
+  -->
+  <configuration default="false" name="JavaDesktopTemplate" type="Application"
+                 factoryName="Application" nameIsGenerated="false">
+    <option name="MAIN_CLASS_NAME" value="com.vintorr.javadesktoptemplate.JavaDesktopTemplateApplication" />
+    <module name="java-desktop-template" />
+    <option name="VM_PARAMETERS"
+            value="--module-path &quot;$PROJECT_DIR$/target/javafx-modules&quot; --add-modules javafx.controls,javafx.graphics,javafx.base" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml"
+              goal="dependency:copy-dependencies@copy-javafx-modules" />
+    </method>
+  </configuration>
+</component>

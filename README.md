@@ -20,8 +20,34 @@ a demo service, both behind interfaces so they can be replaced without touching 
 
 Requires JDK 21. The Maven wrapper downloads Maven on first run.
 
-In IntelliJ: open the folder, let it import the Maven project, then run
-`JavaDesktopTemplateApplication` or the `javafx:run` goal.
+### IntelliJ
+
+Open the folder and let it import the Maven project, then use the shared
+**JavaDesktopTemplate** run configuration in `.run/`.
+
+If you previously opened this project under its old name, hit **Reload All Maven Projects**
+first — the IDE module is renamed to `java-desktop-template`, which is what the run
+configuration binds to.
+
+That configuration exists because JavaFX ships as JPMS modules. Launching it off the classpath
+works, but the toolkit warns:
+
+```
+WARNING: Unsupported JavaFX configuration: classes were loaded from 'unnamed module @...'
+```
+
+The configuration puts the platform modules on the module path instead:
+
+```
+--module-path "$PROJECT_DIR$/target/javafx-modules" --add-modules javafx.controls,javafx.graphics,javafx.base
+```
+
+A before-launch Maven goal (`dependency:copy-dependencies@copy-javafx-modules`) stages those
+modules into `target/javafx-modules`. JavaFX publishes its real modules under a platform
+classifier — the unclassified jar is an empty stub — so the `javafx-*` profiles in `pom.xml`
+select the right one per OS, and the module path works on any machine.
+
+`./mvnw javafx:run` needs none of this; the plugin builds its own module path.
 
 ### Demo account
 
