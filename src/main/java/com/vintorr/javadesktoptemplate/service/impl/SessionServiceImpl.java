@@ -18,6 +18,13 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
+    public void replaceCurrentUser(User user) {
+        if (this.user != null && user != null && this.user.id().equals(user.id())) {
+            this.user = user;
+        }
+    }
+
+    @Override
     public void logout() {
         this.user = null;
         this.remembered = false;

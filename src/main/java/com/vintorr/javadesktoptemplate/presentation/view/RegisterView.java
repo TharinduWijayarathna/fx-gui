@@ -30,15 +30,15 @@ public class RegisterView implements AppView {
     private final AuthenticationService authentication;
     private final Router router;
 
-    private final TextField name = Components.input("Jane Perera");
-    private final TextField business = Components.input("Colombo Event Rentals");
+    private final TextField name = Components.input("Jane Doe");
+    private final TextField business = Components.input("Acme Industries");
     private final TextField email = Components.input("you@example.com");
     private final TextField referral = Components.input(null);
     private final PasswordBox password = new PasswordBox();
     private final PasswordBox confirmation = new PasswordBox();
 
     private final Field nameField = new Field("Your name", name);
-    private final Field businessField = new Field("Business name", business);
+    private final Field businessField = new Field("Organisation", business);
     private final Field emailField = new Field("Email", email);
     private final Field referralField = new Field("Referral code (optional)", referral);
     private final Field passwordField = new Field("Password", password, "At least 8 characters.");
@@ -78,7 +78,7 @@ public class RegisterView implements AppView {
                 passwordField, confirmationField, submit, footer);
 
         Platform.runLater(name::requestFocus);
-        return AuthShell.wrap(form, router.properties().tagline());
+        return AuthShell.wrap(router.properties().title(), router.properties().tagline(), form);
     }
 
     private void submit() {
@@ -96,7 +96,7 @@ public class RegisterView implements AppView {
                     password.getText(),
                     confirmation.getText()));
 
-            router.toasts().success("Saved", "Welcome to Rently, " + user.name() + ".");
+            router.toasts().success("Saved", "Welcome to " + router.properties().title() + ", " + user.name() + ".");
             router.showDashboard();
         } catch (ValidationException e) {
             fieldFor(e.field()).setError(e.getMessage());

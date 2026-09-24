@@ -67,13 +67,14 @@ public class LoginView implements AppView {
         Hyperlink register = Components.link("Sign up", "link");
         register.setOnAction(e -> router.showRegister());
 
-        HBox footer = new HBox(4, Components.label("New to Rently?", "muted-sm"), register);
+        HBox footer = new HBox(4,
+                Components.label("New to " + router.properties().title() + "?", "muted-sm"), register);
         footer.setAlignment(Pos.CENTER);
 
         VBox form = new VBox(16, emailField, passwordField, options, submit, footer);
 
         Platform.runLater(email::requestFocus);
-        return AuthShell.wrap(form, router.properties().tagline());
+        return AuthShell.wrap(router.properties().title(), router.properties().tagline(), form);
     }
 
     private void submit(boolean remember) {

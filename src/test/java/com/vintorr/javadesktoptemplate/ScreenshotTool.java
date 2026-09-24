@@ -7,8 +7,11 @@ import java.util.concurrent.CountDownLatch;
 import com.vintorr.javadesktoptemplate.presentation.view.AppView;
 import com.vintorr.javadesktoptemplate.presentation.view.DashboardView;
 import com.vintorr.javadesktoptemplate.presentation.view.LoginView;
+import com.vintorr.javadesktoptemplate.presentation.view.PeopleView;
+import com.vintorr.javadesktoptemplate.presentation.view.ProfileView;
 import com.vintorr.javadesktoptemplate.presentation.view.RegisterView;
 import com.vintorr.javadesktoptemplate.service.AuthenticationService;
+import com.vintorr.javadesktoptemplate.service.SessionService;
 import com.vintorr.javadesktoptemplate.service.dto.LoginRequest;
 
 import javafx.application.Platform;
@@ -24,7 +27,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 /**
  * Dev utility: renders each screen off-screen and writes a PNG, so UI changes can be
  * eyeballed without launching the app. Pass the output directory as the only argument;
- * override the canvas height with -Drently.shot.height.
+ * override the canvas height with -Dshot.height.
  */
 public final class ScreenshotTool {
 
@@ -38,7 +41,7 @@ public final class ScreenshotTool {
                 .web(WebApplicationType.NONE)
                 .run();
 
-        double height = Double.parseDouble(System.getProperty("rently.shot.height", "840"));
+        double height = Double.parseDouble(System.getProperty("shot.height", "900"));
 
         CountDownLatch done = new CountDownLatch(1);
         Platform.startup(() -> {
@@ -58,15 +61,17 @@ public final class ScreenshotTool {
                 for (Object[] entry : new Object[][] {
                         { "login", LoginView.class },
                         { "register", RegisterView.class },
-                        { "dashboard", DashboardView.class } }) {
+                        { "dashboard", DashboardView.class },
+                        { "people", PeopleView.class },
+                        { "profile", ProfileView.class } }) {
 
                     String name = (String) entry[0];
                     @SuppressWarnings("unchecked")
                     var type = (Class<? extends AppView>) entry[1];
 
-                    if (name.equals("dashboard")) {
+                    if (!context.getBean(SessionService.class).isAuthenticated()) {
                         context.getBean(AuthenticationService.class)
-                                .login(new LoginRequest("demo@vintorr.com", "password", false));
+                                .login(new LoginRequest("demo@example.com", "password", false));
                     }
 
                     Parent root = context.getBean(type).view();

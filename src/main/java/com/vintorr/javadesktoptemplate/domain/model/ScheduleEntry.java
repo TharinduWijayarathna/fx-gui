@@ -1,12 +1,12 @@
 package com.vintorr.javadesktoptemplate.domain.model;
 
-/** A row in "Today's schedule": an order number, the customer, and whether it's a pickup or a return. */
-public record ScheduleEntry(String number, String customer, Kind kind, String time) {
+/** A row in "Today's schedule": a reference, who it involves, and what kind of entry it is. */
+public record ScheduleEntry(String reference, String subject, Kind kind, String time) {
 
     public enum Kind {
-        PICKUP("Pickup", "brand"),
-        RETURN("Return", "info"),
-        BOTH("Pickup & return", "violet");
+        MEETING("Meeting", "brand"),
+        REVIEW("Review", "info"),
+        DEADLINE("Deadline", "violet");
 
         private final String label;
         private final String color;

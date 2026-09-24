@@ -2,18 +2,18 @@ package com.vintorr.javadesktoptemplate.domain.model;
 
 import java.util.List;
 
-/** Everything pages/dashboard/index.blade.php renders. */
+/** Everything the dashboard screen renders. Demo data — see {@code DashboardServiceImpl}. */
 public record DashboardMetrics(
-        int todaysBookings,
-        int todaysReturns,
-        int outNow,
+        int dueToday,
+        int completedToday,
+        int inProgress,
         int overdue,
-        double outstandingPayments,
+        double outstanding,
         double revenue,
-        double depositsHeld,
+        double pipeline,
         List<Double> revenueByDay,
         String revenueRangeStart,
         String revenueRangeEnd,
         List<ScheduleEntry> todaysSchedule,
-        List<OverdueBooking> overdueBookings) {
+        List<AttentionItem> needsAttention) {
 }
