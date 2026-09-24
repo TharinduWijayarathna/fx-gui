@@ -7,6 +7,9 @@ public interface SessionService {
 
     void login(User user, boolean remember);
 
+    /** Swaps in a freshly saved copy of the signed-in user, e.g. after a profile edit. */
+    void replaceCurrentUser(User user);
+
     void logout();
 
     User currentUser();

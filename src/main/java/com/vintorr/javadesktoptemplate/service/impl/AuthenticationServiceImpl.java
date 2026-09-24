@@ -69,10 +69,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private void validate(RegisterRequest request) {
         if (isBlank(request.name())) {
-            throw new ValidationException("name", "The your name field is required.");
+            throw new ValidationException("name", "The name field is required.");
         }
         if (isBlank(request.businessName())) {
-            throw new ValidationException("businessName", "The business name field is required.");
+            throw new ValidationException("businessName", "The organisation field is required.");
         }
         if (isBlank(request.email())) {
             throw new ValidationException("email", "The email field is required.");

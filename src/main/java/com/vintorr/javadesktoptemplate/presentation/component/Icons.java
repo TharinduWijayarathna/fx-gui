@@ -7,8 +7,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.SVGPath;
 
 /**
- * The same Heroicons outline paths the web app uses
- * (resources/views/components/ui/icon.blade.php + the sidebar nav in layouts/app.blade.php).
+ * Heroicons outline paths (MIT, Tailwind Labs) — the same set the web app's
+ * components/ui/icon.blade.php and sidebar draw from, plus the glyphs this shell adds.
  */
 public final class Icons {
 
@@ -67,7 +67,36 @@ public final class Icons {
             Map.entry("card", "M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"),
             Map.entry("support", "M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 "
                     + "9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"),
-            Map.entry("menu", "M4 6h16M4 12h16M4 18h16")
+            Map.entry("menu", "M4 6h16M4 12h16M4 18h16"),
+
+            // account, table and toolbar glyphs
+            Map.entry("user", "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"),
+            Map.entry("user-plus", "M17 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"),
+            Map.entry("logout", "M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"),
+            Map.entry("table", "M3 10h18M3 15h18M10 4v17M5 21h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v13a2 2 0 002 2z"),
+            Map.entry("document", "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 "
+                    + "1 0 01.293.707V19a2 2 0 01-2 2z"),
+            Map.entry("inbox", "M20 13V7a2 2 0 00-2-2H6a2 2 0 00-2 2v6m16 0h-4l-2 3h-4l-2-3H4m16 0v5a2 2 0 01-2 2H6a2 2 "
+                    + "0 01-2-2v-5"),
+            Map.entry("filter", "M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 "
+                    + "4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"),
+            Map.entry("download", "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"),
+            Map.entry("trash", "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 "
+                    + "00-1-1h-4a1 1 0 00-1 1v3M4 7h16"),
+            Map.entry("pencil", "M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 "
+                    + "15H9v-2.828l8.586-8.586z"),
+            Map.entry("chevron-down", "M19 9l-7 7-7-7"),
+            Map.entry("chevron-up", "M5 15l7-7 7 7"),
+            Map.entry("selector", "M8 9l4-4 4 4m0 6l-4 4-4-4"),
+            Map.entry("bell", "M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 "
+                    + "0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"),
+            Map.entry("shield-check", "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 "
+                    + "3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"),
+
+            // the logo mark: Heroicons "view-grid" (MIT, Tailwind Labs)
+            Map.entry("squares", "M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 "
+                    + "011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zM14 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 "
+                    + "01-1-1V5zM14 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z")
     );
 
     private Icons() {

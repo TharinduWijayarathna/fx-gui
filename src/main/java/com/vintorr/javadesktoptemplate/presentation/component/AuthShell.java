@@ -6,8 +6,6 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.GaussianBlur;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -20,8 +18,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Port of layouts/guest.blade.php — the patterned auth background with the logo,
- * tagline and a max-w-md card in the middle.
+ * The auth backdrop: a patterned, radially masked background with the logo lockup and a
+ * max-width card in the middle. Ported from the web app's layouts/guest.blade.php.
  */
 public final class AuthShell {
 
@@ -31,23 +29,14 @@ public final class AuthShell {
     private AuthShell() {
     }
 
-    public static Region wrap(Node cardContent, String tagline) {
+    public static Region wrap(String title, String tagline, Node cardContent) {
         VBox card = new VBox(cardContent);
         card.getStyleClass().add("auth-card");
         card.setPadding(new Insets(32));
         card.setMaxWidth(448);
         card.setMaxHeight(Region.USE_PREF_SIZE);
 
-        ImageView logo = new ImageView(new Image(
-                AuthShell.class.getResourceAsStream("/com/vintorr/javadesktoptemplate/images/vintorr-rently-logo.png")));
-        logo.setPreserveRatio(true);
-        logo.setFitWidth(224);
-        logo.setSmooth(true);
-
-        VBox brand = new VBox(12, logo, Components.label(tagline, "muted-xs"));
-        brand.setAlignment(Pos.CENTER);
-
-        VBox content = new VBox(32, brand, card);
+        VBox content = new VBox(32, Brand.lockup(title, tagline), card);
         content.setAlignment(Pos.CENTER);
         content.setPadding(new Insets(40, 16, 40, 16));
         content.setMaxWidth(Region.USE_PREF_SIZE);

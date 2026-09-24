@@ -1,6 +1,7 @@
 /*
- * Vintorr Rently — desktop theme.
- * Ported from the web app's tailwind.config.js tokens + resources/css/app.css components.
+ * The desktop design system: colour tokens, then a component class per widget.
+ * Re-skinning the template starts here — the -brand-* and -accent-* ramps below are the
+ * only place the product's colours are declared.
  */
 
 .root {
@@ -526,3 +527,184 @@
 .crumb-current { -fx-text-fill: -slate-800; -fx-font-size: 12px; }
 .danger-xs     { -fx-text-fill: -danger-600; -fx-font-size: 12px; }
 .icon-success  { -fx-stroke: -success-600; }
+
+/* ---------------------------------------------------------------- brand */
+
+/* The logo tile paints its gradient inline (see component/Brand) so it also renders
+   into the window icon, where no stylesheet is attached. */
+.brand-wordmark {
+    -fx-font-family: "DM Sans 9pt SemiBold", "DM Sans 9pt", sans-serif;
+    -fx-font-size: 17px;
+    -fx-text-fill: -stone-900;
+}
+
+/* the auth screens' lockup, where the mark is 44px */
+.brand-wordmark-lg {
+    -fx-font-family: "DM Sans 9pt SemiBold", "DM Sans 9pt", sans-serif;
+    -fx-font-size: 26px;
+    -fx-text-fill: -stone-900;
+}
+
+/* ------------------------------------------------------- danger buttons */
+
+.btn-danger {
+    -fx-background-color: -danger-50;
+    -fx-text-fill: -danger-700;
+    -fx-border-color: -danger-100;
+    -fx-border-width: 1;
+}
+.btn-danger:hover   { -fx-background-color: -danger-100; }
+.btn-danger:pressed { -fx-background-color: -danger-100; -fx-opacity: 0.9; }
+.btn-danger .icon   { -fx-stroke: -danger-700; }
+
+/* --------------------------------------------------------------- selects */
+
+/* .form-select */
+.form-select {
+    -fx-background-color: -surface;
+    -fx-background-radius: 20;
+    -fx-border-color: -stone-200;
+    -fx-border-radius: 20;
+    -fx-border-width: 1;
+    -fx-min-height: 44;
+    -fx-pref-height: 44;
+    -fx-padding: 0 6 0 8;
+    -fx-cursor: hand;
+}
+.form-select:hover   { -fx-border-color: -stone-300; }
+.form-select:focused { -fx-border-color: -brand-400; }
+.form-select > .list-cell {
+    -fx-padding: 0 4 0 6;
+    -fx-font-size: 14px;
+    -fx-text-fill: -stone-900;
+    -fx-background-color: transparent;
+}
+.form-select .arrow-button { -fx-background-color: transparent; -fx-padding: 0 6 0 0; }
+.form-select .arrow {
+    -fx-background-color: -stone-400;
+    -fx-shape: "M7 10l5 5 5-5z";
+    -fx-padding: 3 5 3 5;
+}
+.form-select-sm { -fx-min-height: 36; -fx-pref-height: 36; -fx-background-radius: 16; -fx-border-radius: 16; }
+.form-select-sm > .list-cell { -fx-font-size: 13px; }
+
+.form-select .list-view, .combo-box-popup .list-view {
+    -fx-background-color: -surface;
+    -fx-background-radius: 16;
+    -fx-border-color: -stone-200;
+    -fx-border-radius: 16;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(28, 25, 23, 0.14), 24, 0.1, 0, 8);
+    -fx-padding: 4;
+}
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 8 12 8 12;
+    -fx-background-radius: 12;
+    -fx-font-size: 13px;
+    -fx-text-fill: -stone-800;
+}
+.combo-box-popup .list-view .list-cell:filled:hover,
+.combo-box-popup .list-view .list-cell:filled:selected {
+    -fx-background-color: -stone-100;
+    -fx-text-fill: -stone-900;
+}
+
+/* search input leaves room for the magnifier */
+.form-input-search { -fx-padding: 0 14 0 38; }
+
+/* ------------------------------------------------------------ data table */
+
+/* The filter card above the table (.filter-bar on the web). */
+.filter-bar { -fx-background-radius: 20; }
+
+.data-table {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-table-cell-border-color: transparent;
+}
+.data-table:focused { -fx-background-insets: 0; }
+
+/* thead — bg-surface-soft, 2xs, uppercase, tracking-wider */
+.data-table .column-header-background { -fx-background-color: -surface-soft; }
+.data-table .column-header-background > .filler { -fx-background-color: transparent; }
+.data-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: -stone-200;
+    -fx-border-width: 0 0 1 0;
+    -fx-size: 44;
+    -fx-padding: 0 16 0 16;
+}
+.data-table .column-header .label {
+    -fx-font-family: "DM Sans 9pt SemiBold", "DM Sans 9pt", sans-serif;
+    -fx-font-size: 11px;
+    -fx-text-fill: -stone-500;
+    -fx-alignment: center-left;
+    -fx-padding: 0;
+}
+.data-table .column-header.column-right .label { -fx-alignment: center-right; }
+.data-table .column-header .sort-order-dot, .data-table .column-header .sort-order { -fx-background-color: -stone-400; }
+.data-table .column-header GridPane { -fx-padding: 0; }
+.data-table .column-header .arrow {
+    -fx-background-color: -stone-500;
+    -fx-padding: 3 4 3 4;
+    -fx-shape: "M7 10l5 5 5-5z";
+}
+
+/* tbody — divide-y divide-stone-100, hover:bg-brand-50/40 */
+.data-table .table-row-cell {
+    -fx-background-color: -surface;
+    -fx-border-color: -stone-100;
+    -fx-border-width: 0 0 1 0;
+    -fx-table-cell-border-color: transparent;
+}
+.data-table .table-row-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+.data-table .table-row-cell:hover { -fx-background-color: rgba(255, 245, 242, 0.55); }
+.data-table .table-cell {
+    -fx-padding: 0 16 0 16;
+    -fx-border-color: transparent;
+    -fx-font-size: 13px;
+    -fx-text-fill: -stone-700;
+}
+.data-table .table-cell.font-medium {
+    -fx-font-family: "DM Sans 9pt Medium", "DM Sans 9pt", sans-serif;
+    -fx-text-fill: -stone-900;
+}
+.data-table .table-cell.tabular {
+    -fx-font-family: "DM Sans 9pt Medium", "DM Sans 9pt", sans-serif;
+    -fx-text-fill: -stone-900;
+}
+.data-table .placeholder { -fx-background-color: transparent; -fx-padding: 12; }
+.data-table > .virtual-flow > .corner { -fx-background-color: transparent; }
+
+/* the "3 rows selected" strip above the table */
+.bulk-bar {
+    -fx-background-color: -brand-50;
+    -fx-border-color: -brand-100;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* ----------------------------------------------------------- empty state */
+
+.empty-state {
+    -fx-background-color: rgba(250, 250, 249, 0.6);
+    -fx-background-radius: 16;
+    -fx-border-color: -stone-200;
+    -fx-border-radius: 16;
+    -fx-border-width: 1;
+    -fx-border-style: segments(6, 6) line-cap round;
+}
+.empty-icon { -fx-background-color: -brand-50; -fx-background-radius: 14; }
+.empty-title {
+    -fx-font-family: "DM Sans 9pt SemiBold", "DM Sans 9pt", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: -slate-900;
+}
+
+/* ------------------------------------------------------------- app menu */
+
+.menu-separator { -fx-background-color: -stone-100; }

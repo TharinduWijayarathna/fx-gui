@@ -2,10 +2,12 @@ package com.vintorr.javadesktoptemplate.presentation.component;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -68,6 +70,11 @@ public final class Components {
         return button(text, icon, false, "btn", "btn-secondary");
     }
 
+    /** x-ui.button variant=danger */
+    public static Button danger(String text, String icon) {
+        return button(text, icon, false, "btn", "btn-danger");
+    }
+
     public static Button ghost(String text, String icon) {
         return button(text, icon, false, "btn", "btn-ghost");
     }
@@ -113,6 +120,27 @@ public final class Components {
         }
         field.setMaxWidth(Double.MAX_VALUE);
         return field;
+    }
+
+    /** x-ui.input type=search — a text field with the magnifier tucked inside it. */
+    public static StackPane searchField(TextField field) {
+        field.getStyleClass().add("form-input-search");
+        Region icon = Icons.of("search", 16, "icon-muted");
+        StackPane wrap = new StackPane(field, icon);
+        StackPane.setAlignment(icon, Pos.CENTER_LEFT);
+        StackPane.setMargin(icon, new Insets(0, 0, 0, 14));
+        wrap.setAlignment(Pos.CENTER_LEFT);
+        wrap.setMaxWidth(Double.MAX_VALUE);
+        return wrap;
+    }
+
+    /** x-ui.select */
+    public static ComboBox<String> select(List<String> options, String selected) {
+        ComboBox<String> select = new ComboBox<>(FXCollections.observableArrayList(options));
+        select.getStyleClass().add("form-select");
+        select.setMaxWidth(Double.MAX_VALUE);
+        select.setValue(selected);
+        return select;
     }
 
     // ------------------------------------------------------------ cards

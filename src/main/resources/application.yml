@@ -8,8 +8,8 @@ spring:
 # Branding and window geometry for the shell. Point these at another product and the
 # desktop chrome follows — nothing in the presentation layer hard-codes them.
 app:
-  title: Vintorr Rently
-  tagline: Rental management for growing businesses
+  title: Acme Suite
+  tagline: A Spring Boot + JavaFX desktop template
   window:
     width: 1280
     height: 840
